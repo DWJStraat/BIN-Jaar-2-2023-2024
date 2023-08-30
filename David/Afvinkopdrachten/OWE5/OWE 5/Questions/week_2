@@ -1,0 +1,39 @@
+1.  Syntax are the rules that define how a programming language is to be read. An example of a piece of python
+    code that will generate a syntax error is:
+        print "test"
+
+    Semantics is the meaning of the code. An example of a piece of python code that will generate a semantic is:
+        int('test')
+
+2.  The computer stores the program in the memory in the form of the variable. This way, it can be accessed easily
+    by other texts.
+
+3. A type in programming is a way of classifying data.
+
+4. A boolean is a true/false, 0 or 1
+
+5. In python:
+    a. += 1
+    b. and
+    c. is not
+
+6. An assignment statement is where a valuable is assigned to a variable
+
+7. Operator precedence is the order in which operators are recognized, similarly to the order in which mathematical
+   calculations are done.
+
+8.  A literal is a constant value assigned to a variable.
+
+9.  To create objects and define data types and methods.
+
+10. If 'ln' is not included, it will discard all characters that are not associated with the datatype.
+
+11. "test2test2test2"
+
+12. Int, Double, and Bool types are primitive types, and thus handled on a more simple level. String is not a primitive
+    type, and thus is handled on a more complex level.
+
+13. An import directive is used to direct Java to read another piece of code that is not in the current file and store
+    the classes as objects in the memory.
+
+14. See week_2_0

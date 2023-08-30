@@ -1,0 +1,22 @@
+This code draws a H2O molecule at the x and y defined by the user and deletes the old H2O molecule
+
+define a as distance from oxygen to hydrogen
+define b as radius of oxygen atom
+define c as radius of hydrogen atom
+define d as angle between two hydrogen atoms
+create frame
+    create canvas
+    create field for x
+    create field for y
+    create button for draw
+
+when draw is pressed
+    delete old H2O molecule
+    draw red circle at x and y specified in canvas
+    draw blue circle at x + a and y
+    draw blue circle at x + a*cos(d) and y + a*sin(d)
+    draw line from x to x + a*cos(d) and y to y + a*sin(d)
+    draw line from x + a to x + a*cos(d) and y to y + a*sin(d)
+    draw line from x + a to x and y + a to y
+
+

@@ -1,0 +1,9 @@
+This script asks the user to enter the number of widgets they want to buy and the cost per widget, and then will
+calculate the total cost of the widgets.
+
+print("How many widgets do you want to buy?")
+set widgets = input
+print("How much does each widget cost?")
+set cost = input
+set total = widgets * cost
+print("The total cost of your widgets is " + total)
