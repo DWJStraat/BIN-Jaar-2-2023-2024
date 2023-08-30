@@ -1,0 +1,8 @@
+This program returns "Hello" followed by the argument given to it. If no argument is given, it gives an error.
+
+name = arg[0]
+if name == nil then
+  print("Error: No argument given")
+else
+  create popup
+    popup text = "Hello " + name

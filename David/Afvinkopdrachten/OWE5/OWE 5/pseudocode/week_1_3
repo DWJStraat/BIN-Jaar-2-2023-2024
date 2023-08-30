@@ -1,0 +1,15 @@
+This program creates a popup in which you can enter several pieces of information, after which it gives popups with
+the information you entered.
+
+create screen
+    add text box for name
+    add text box for age
+    add text box for height in cm
+    add text box for weight in kg
+    add button to submit
+
+when submit button is pressed
+    create popup with "Hello <name>!"
+    create popup with "You are <age> years old!"
+    create popup with "You are <height> cm tall!"
+    create popup with "You weigh <weight> kg!"

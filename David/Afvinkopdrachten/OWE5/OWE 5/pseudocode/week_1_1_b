@@ -1,0 +1,4 @@
+This program will create a popup with the words "Hello World!" when ran
+
+create popup
+    popup.text = "Hello World!"
