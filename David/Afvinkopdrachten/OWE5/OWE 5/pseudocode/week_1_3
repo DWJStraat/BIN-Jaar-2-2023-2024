@@ -9,7 +9,7 @@ create screen
     add button to submit
 
 when submit button is pressed
-    create popup with "Hello <name>!"
-    create popup with "You are <age> years old!"
-    create popup with "You are <height> cm tall!"
+    create popup with "Hello <name>!" then
+    create popup with "You are <age> years old!" then
+    create popup with "You are <height> cm tall!" then
     create popup with "You weigh <weight> kg!"

@@ -30,7 +30,7 @@ public class bonus {
             if (comp instanceof Container) {
                 Component[] comps = ((Container) comp).getComponents();
                 try {
-                    comp = comps[0];
+                    comp = comps[1];
                     System.out.println(comp.toString());
                     removeMinMaxClose(comp);
                 } catch (Exception e) {
