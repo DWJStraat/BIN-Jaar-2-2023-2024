@@ -1,0 +1,19 @@
+This code plays tic tac toe
+
+create screen
+    set turn to "x"
+    create board
+        create 3x3 grid
+            when a field is pressed
+            set field content to turn
+            if turn = "x"
+                set turn to "o"
+            else
+                set turn to "x"
+            end if
+            if there is a winner
+                show winner
+            end if
+        end create
+    end create
+end create
