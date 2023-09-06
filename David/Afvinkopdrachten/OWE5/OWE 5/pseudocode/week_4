@@ -1,0 +1,12 @@
+This script creates a GUI on which a horse race is simulated minimalistically
+
+create screen
+    create horses
+    set max_dist to 0
+    while max_dist < 100:
+        move horses
+        get distance from each horses
+        set max_dist to max distance
+        draw positions
+        wait 0.5 seconds
+    print winner

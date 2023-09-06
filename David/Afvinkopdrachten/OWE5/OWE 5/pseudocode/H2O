@@ -18,5 +18,3 @@ when draw is pressed
     draw line from x to x + a*cos(d) and y to y + a*sin(d)
     draw line from x + a to x + a*cos(d) and y to y + a*sin(d)
     draw line from x + a to x and y + a to y
-
-
