@@ -1,0 +1,16 @@
+This code accepts a string of 1 letter protein codes, and translates them to 3 letter codes
+
+create screen
+    create text box for input
+    create button to translate
+    create label to display output
+    when button is clicked
+        get input
+        for each letter in input
+            make letter upper case
+            if letter not in dictionary
+                display error message
+                exit
+            translate letter
+            add translated letter to output
+        display output

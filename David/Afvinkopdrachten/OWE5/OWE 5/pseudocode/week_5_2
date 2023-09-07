@@ -1,0 +1,19 @@
+This code creates a word prediction code, divided in two parts: the backend and the frontend. It makes use of the
+file found at https://downloads.tatoeba.org/exports/sentences.tar.bz2, which contains a list of sentences in many
+languages.
+
+Backend:
+Set string input as argument
+Split string into words
+For each word, filter the list of sentences to only those that contain the word
+Find the longest common substring between the input and the sentences
+Return the sentence
+
+Frontend:
+Create screen
+    Create text box
+    Create label
+    Create button
+    When button is pressed, call backend
+    Display result in label
+    Clear text box

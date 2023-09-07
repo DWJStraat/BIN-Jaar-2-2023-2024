@@ -8,5 +8,5 @@ create screen
         get distance from each horses
         set max_dist to max distance
         draw positions
-        wait 0.5 seconds
+        wait 1 second
     print winner
