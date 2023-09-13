@@ -1,0 +1,34 @@
+This code opens a file and extracts information about the protein within, displaying this within a window
+
+
+file = null
+Create window
+    Create label containing "File Name"
+    Create label containing "Information"
+    Create label containing "Percentage"
+    Create panel polarity
+    Create textarea info
+    Create textfield  filename
+    Create button open
+    Create button analyze
+
+When open pressed:
+    Open filedialog
+    If file selected:
+        Set info to blank
+        Clear polarity
+        Set file to selected file
+        Set filename to selected file name
+    else:
+        Display error message
+
+When analyze pressed:
+    If file.contents is protein:
+        Calculate polarity
+        Calculate protein length
+        Set info to output message containing polarity and length
+        In polarity,
+            draw rectangle for polarity
+            draw rectangle for non-polarity
+    else:
+        Display error message

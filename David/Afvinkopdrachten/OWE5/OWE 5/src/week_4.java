@@ -6,7 +6,7 @@ class Horse extends Paard {
     Horse(String naam, Color kleur, Image plaatje) {
         super(naam, kleur, plaatje);
     }
-}
+    }
 public class week_4 {
     public static void main(String[] args) {
         race();
@@ -45,7 +45,7 @@ public class week_4 {
         frame.setVisible(true);
         Graphics g = frame.getGraphics();
         while (max_distance < goal) {
-            max_distance = run(horses, max_distance, goal, 1, g, frame);
+            max_distance = run(horses, max_distance, goal, 300, g, frame);
         }
 
 
@@ -53,7 +53,7 @@ public class week_4 {
 
     public static int run(ArrayList<Horse> horses, int max_distance, int goal, int delay, Graphics g, JFrame frame) {
         try {
-            Thread.sleep(delay * 1000L);
+            Thread.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -77,9 +77,4 @@ public class week_4 {
         return max_distance;
 
     }
-
-
-
-
-
 }

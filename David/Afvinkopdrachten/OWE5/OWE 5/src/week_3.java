@@ -31,14 +31,14 @@ public class week_3 {
 
 
         for (int i = 0; i < 3; i++) {
-            add_button(x,y,frame, player, tictactoe);
+            add_button(x,y,frame, player, tictactoe, length);
             x += length;
         }
     }
 
-    public static void add_button(int x, int y, JFrame frame, Turn player, Board tictactoe){
+    public static void add_button(int x, int y, JFrame frame, Turn player, Board tictactoe, int length){
         JButton button = new JButton();
-        button.setBounds(x,y,100,100);
+        button.setBounds(x,y,length,length);
         button.addActionListener(e -> {
             frame.setTitle("Tic-Tac-Toe - " + player.turn + "'s turn");
             Turn.main(player);
