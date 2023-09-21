@@ -1,3 +1,5 @@
+package headacheRemoval;
+
 import javax.swing.*;
 
 public class createWindow {
