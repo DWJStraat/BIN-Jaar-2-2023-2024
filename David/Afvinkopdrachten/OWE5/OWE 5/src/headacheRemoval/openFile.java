@@ -32,6 +32,7 @@ public class openFile {
         }
     }
     public static void readFile() {
+
         try {
             content = readAllLines(file.toPath());
         } catch (IOException ex) {

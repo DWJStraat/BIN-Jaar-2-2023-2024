@@ -1,0 +1,24 @@
+This code reads a sequence and visualizes it
+
+file = null
+Create Window
+    Create text "file:"
+    Create button "open"
+    Create entry field "file_name"
+    Create text "sequence"
+    Create entry field "sequence"
+    Create visual canvas "visual"
+
+When "open" is pressed:
+    Open file dialog
+    If file is pressed:
+        Set "file_name" to file name
+        If file contents is not a valid sequence:
+            Set "sequence" to "ERROR, file not a valid sequence"
+        Else:
+            Set "sequence" to file contents
+            Draw sequence on "visual"
+    Else:
+        Set "file_name" to ""
+        Set "sequence" to "ERROR, file not found"
+        Draw nothing on "visual"
