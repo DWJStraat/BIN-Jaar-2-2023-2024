@@ -1,12 +1,11 @@
 import headacheRemoval.createWindow;
 import headacheRemoval.openFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.regex.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class week_7 {
     /**
@@ -14,6 +13,7 @@ public class week_7 {
      *   and a visual representation of the sequence.
      */
     public static createWindow window = new createWindow("SEQVIS", 500, 500);
+    private static openFile openFile = new openFile();
     public static Seq seq;
     public static JButton open = new JButton("Open");
     public static JTextField file_name_field = new JTextField();
@@ -60,8 +60,22 @@ public class week_7 {
             content.remove(0);
             String sequence = String.join("", content);
             content.add(0, seqname);
-            // create a new Seq object
-            seq = new Seq(seqname, sequence);
+            // determine the type of the sequence
+            Pattern DNA = Pattern.compile("^[ATCG]+$");
+            Pattern RNA = Pattern.compile("^[AUCG]+$");
+            Pattern PROTEIN = Pattern.compile("^[ARNDCEQGHILKMFP^STWYV]+$");
+            Matcher DNA_match = DNA.matcher(sequence);
+            Matcher RNA_match = RNA.matcher(sequence);
+            Matcher PROTEIN_match = PROTEIN.matcher(sequence);
+            if(DNA_match.find()) {
+                seq = new DNA(seqname, sequence);
+            } else if (RNA_match.find()) {
+                seq = new RNA(seqname, sequence);
+            } else if (PROTEIN_match.find()) {
+                seq = new Protein(seqname, sequence);
+            } else {
+                throw new IllegalArgumentException("InvalidSeq");
+            }
             // set the text fields
             file_name_field.setText(openFile.name);
             String text  = String.join("\n", openFile.content);

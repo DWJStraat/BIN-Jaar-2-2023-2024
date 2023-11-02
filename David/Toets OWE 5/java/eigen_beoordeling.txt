@@ -1,0 +1,16 @@
+1. GUI functionaliteit
+a. Juiste opbouw GUI: 1/2
+b. Juiste weergave van gevraagde GUI elementen: 3/4
+2. Exception handling
+a. Afvangen standaard exceptions: 2/2
+b. Custom exception handling: 2/2
+3. Applicatie Logica
+a. Efficiente en correcte verwerking van bestand: 1/2
+b. Juist berekening: 2/2
+c. Code is generiek geschreven: 4/5
+d. Code voldoet aan Java conventies: 1/2
+4. Documentatie en commentaar
+a. Goed gebruik van commentaar inclusief Javadoc documentatie: 2/2
+
+Totaal: 18/23
+Cijfer: 7.8

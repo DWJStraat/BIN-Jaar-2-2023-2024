@@ -1,0 +1,10 @@
+This script loads a list of pokemon from a csv and assigns them colors based on power.
+
+open csv
+read csv
+for each line in csv
+    create pokemon object
+    assign color based on power
+        red = attack + defense
+        blue = special attack + special defense
+        green = speed + hp

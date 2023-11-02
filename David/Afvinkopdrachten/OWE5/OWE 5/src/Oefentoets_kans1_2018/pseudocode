@@ -1,0 +1,39 @@
+This script creates a screen that accepts a FASTA file and returns the GC%.
+
+Create window
+    Create button to browse
+    Create text field "file_path" to display/enter file path
+    Create text field "start" to enter starting position (empty by default)
+    Create text field "end" to enter ending position (empty by default)
+    Create button to open file
+    Create button to calculate GC%
+    Create bar to display GC%
+    Create display to show accession code
+    Create display to show sequence name
+
+When "browse" is pressed
+    Open file browser
+    Set file_path to selected file
+    Set file_path text field to file_path
+
+When "open file" is pressed
+    File = open file_path
+    If file is null:
+        ERROR
+    Set end to length of file
+    Set start to 1
+    Set start text field to start
+    Set end text field to end
+    Get sequence name
+    Get accession code
+    Set sequence name text field to sequence name
+    Set accession code text field to accession code
+
+When "calculate GC%" is pressed
+    If file is null:
+        ERROR
+    Else:
+        Set start to start text field
+        Set end to end text field
+        Set GC% to calculate GC%(file, start, end)
+        Set GC% bar to GC%

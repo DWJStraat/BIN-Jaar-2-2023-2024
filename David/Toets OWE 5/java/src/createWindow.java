@@ -1,5 +1,3 @@
-package headacheRemoval;
-
 import javax.swing.*;
 
 /**
@@ -20,9 +18,6 @@ public class createWindow {
         build(title, width, height);
     }
 
-    public void main(String[] args) {
-
-    }
 
     /**
      * Creates a window with a given title, width and height.

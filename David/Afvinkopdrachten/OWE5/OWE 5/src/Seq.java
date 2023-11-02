@@ -1,21 +1,18 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * The Seq class, which contains the sequence and its properties.
  */
-public class Seq {
+abstract class Seq {
+    public abstract void setColor(String symbol);
+    public abstract Color getColor(int i);
     static String sequence;
     static int length;
-    static String type;
     static String seqname;
     static java.util.List<Color> colors = new ArrayList<>();
-    private static final Pattern DNA = Pattern.compile("^[ATCG]+$");
-    private static final Pattern RNA = Pattern.compile("^[AUCG]+$");
-    private static final Pattern PROTEIN = Pattern.compile("^[ARNDCEQGHILKMFP^STWYV]+$");
+
 
     /**
      * The constructor for the Seq class
@@ -27,8 +24,6 @@ public class Seq {
         Seq.seqname = seqname;
         Seq.sequence = sequence;
         setLength();
-        setType();
-        setColors();
     }
 
     /**
@@ -42,8 +37,6 @@ public class Seq {
         seqname = args[0];
         sequence = args[1].toUpperCase();
         setLength();
-        setType();
-        setColors();
     }
 
     /**
@@ -51,96 +44,6 @@ public class Seq {
      */
     private static void setLength() {
         length = sequence.length();
-    }
-
-    /**
-     * Sets the type of the sequence
-     * @throws IllegalArgumentException if the sequence is not DNA, RNA, or protein
-     */
-    private static void setType() {
-        // determine the type of the sequence
-        Matcher DNA_match = DNA.matcher(sequence);
-        Matcher RNA_match = RNA.matcher(sequence);
-        Matcher PROTEIN_match = PROTEIN.matcher(sequence);
-        if(DNA_match.find()) {
-            type = "DNA";
-        } else if(RNA_match.find()) {
-            type = "RNA";
-        } else if(PROTEIN_match.find()) {
-            type = "PROTEIN";
-        } else {
-            throw new IllegalArgumentException("NoValidSeq");
-        }
-    }
-
-    /**
-     * Sets the colors of the sequence
-     * @throws IllegalArgumentException if the sequence is not DNA, RNA, or protein
-     */
-    public static void setColors() {
-        // set the colors of the sequence
-        for(int i = 0; i <= length-1; i++) {
-            String letter = sequence.substring(i, i+1);
-            if(DNA.matcher(sequence).find()) {
-                dnaColor(letter);
-            }
-            if(RNA.matcher(sequence).find()) {
-                rnaColor(letter);
-            }
-            if(PROTEIN.matcher(sequence).find()) {
-                protColor(letter);
-            } else {
-                throw new IllegalArgumentException("Invalid sequence type; " + sequence+ "\n type: '" + type + "'");
-            }
-        }
-    }
-
-    /**
-     * Determines the colors of the nucleotide and adds them to the colors list
-     * @param nucleotide The nucleotide to be colored
-     */
-    private static void dnaColor(String nucleotide){
-        /*
-        determines the colors of the nucleotide and adds them to the colors list
-        @param nucleotide The nucleotide to be colored
-         */
-        switch (nucleotide) {
-            case "A", "T" -> colors.add(Color.YELLOW);
-            case "C", "G" -> colors.add(Color.RED);
-            default -> colors.add(Color.BLACK);
-        }
-    }
-
-    /**
-     * Determines the colors of the nucleotide and adds them to the colors list
-     * @param nucleotide the nucleotide to be colored
-     */
-    private static void rnaColor(String nucleotide){
-        /*
-            Determines the colors of the nucleotide and adds them to the colors list
-            @param nucleotide The nucleotide to be colored
-         */
-        switch (nucleotide) {
-            case "A", "U" -> colors.add(Color.BLUE);
-            case "C", "G" -> colors.add(Color.RED);
-            default -> colors.add(Color.BLACK);
-        }
-    }
-
-    /**
-     * Determines the colors of the residue and adds them to the colors list
-     * @param residue The residue to be colored
-     */
-    private static void protColor(String residue){
-        /*
-        determines the colors of the residue and adds them to the colors list
-        @param residue The residue to be colored
-         */
-        switch (residue) {
-            case "D", "E", "R", "K", "H" -> colors.add(Color.BLUE);
-            case "N", "Q", "S", "T", "Y" -> colors.add(Color.GREEN);
-            default -> colors.add(Color.gray);
-        }
     }
 
     /**
@@ -180,20 +83,6 @@ public class Seq {
     }
 
     /**
-     * Returns the color of a specific nucleuotide/residue
-     * @param i the index of the nucleotide/residue
-     * @return the color of the nucleotide/residue
-     */
-    public static Color getColor(int i){
-        /*
-        returns the color at index i
-        @param i The index of the color
-        @return the color at index i
-         */
-        return colors.get(i);
-    }
-
-    /**
      * Returns the colored list of the sequence
      * @return colors The list of colors
      */
@@ -205,20 +94,132 @@ public class Seq {
         return colors;
     }
 
+
+}
+
+class DNA extends Seq {
+
+    /** Returns the color of the nucleotide at the given index
+     * @param i The index of the nucleotide
+     * @return The color of the nucleotide
+     */
+    public Color getColor(int i) {
+        return colors.get(i);
+    }
+
+    @Override
+    public void setColor(String nucleotide) {
+        switch (nucleotide) {
+            case "A", "T" -> colors.add(Color.YELLOW);
+            case "C", "G" -> colors.add(Color.RED);
+            default -> colors.add(Color.BLACK);
+        }
+    }
+
     /**
-     * Returns the GC% of the sequence
-     * @return The GC percentage of the sequence, provided it is DNA
-     * @throws IllegalArgumentException if the sequence is not DNA
+     * The constructor for the Seq class
+     *
+     * @param seqname  The name of the sequence
+     * @param sequence The sequence itself
+     */
+    public DNA(String seqname, String sequence) {
+        super(seqname, sequence);
+        for(int i = 0; i < length; i++){
+            setColor(sequence.substring(i, i+1));
+        }
+    }
+
+    /**
+     * @return gc The GC percentage of the sequence
      */
     public static Float getGCperc() {
         /*
         returns the GC percentage of the sequence
         @return gc The GC percentage of the sequence
          */
-        if (PROTEIN.matcher(sequence).find()) {
-            throw new IllegalArgumentException("Invalid sequence type; " + sequence+ "\n type: '" + type + "'");
-        }
         long gc = sequence.chars().filter(ch -> ch == 'G' || ch == 'C').count();
         return (float) gc / length;
     }
+}
+
+class RNA extends Seq {
+
+    /**
+     * @param i The index of the nucleotide
+     * @return The color of the nucleotide
+     */
+    @Override
+    public Color getColor(int i) {
+        return colors.get(i);
+    }
+
+    /**
+     * The constructor for the Seq class
+     *
+     * @param seqname  The name of the sequence
+     * @param sequence The sequence itself
+     */
+    public RNA(String seqname, String sequence) {
+        super(seqname, sequence);
+        for(int i = 0; i < length; i++){
+            setColor(sequence.substring(i, i+1));
+        }
+    }
+
+    /**
+     * @param nucleotide The nucleotide to be colored
+     */
+    public void setColor(String nucleotide){
+        /*
+            Determines the colors of the nucleotide and adds them to the colors list
+            @param nucleotide The nucleotide to be colored
+         */
+        switch (nucleotide) {
+            case "A", "U" -> colors.add(Color.BLUE);
+            case "C", "G" -> colors.add(Color.RED);
+            default -> colors.add(Color.BLACK);
+        }
+    }
+}
+
+
+class Protein extends Seq {
+
+    /**
+     * @param i The index of the residue
+     * @return The color of the residue
+     */
+    @Override
+    public Color getColor(int i) {
+        return colors.get(i);
+    }
+
+    /**
+     * The constructor for the Seq class
+     *
+     * @param seqname  The name of the sequence
+     * @param sequence The sequence itself
+     */
+    public Protein(String seqname, String sequence) {
+        super(seqname, sequence);
+        for(int i = 0; i < length; i++){
+            setColor(sequence.substring(i, i+1));
+        }
+    }
+
+    /**
+     * @param residue The residue to be colored
+     */
+    public void setColor(String residue){
+        /*
+        determines the colors of the residue and adds them to the colors list
+        @param residue The residue to be colored
+         */
+        switch (residue) {
+            case "D", "E", "R", "K", "H" -> colors.add(Color.BLUE);
+            case "N", "Q", "S", "T", "Y" -> colors.add(Color.GREEN);
+            default -> colors.add(Color.gray);
+        }
+    }
+
 }
