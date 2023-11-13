@@ -1,4 +1,4 @@
-package week_2;
+package week_2.game_of_life;
 
 import headacheRemoval.createWindow;
 
@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class game_of_life_gui {
+public class game_of_life_gui extends Thread {
     private static int resolution = 10;
     private static createWindow window = new createWindow("Game of Life", 300, 200);
     private static JPanel canvas = new JPanel();
@@ -22,7 +22,13 @@ public class game_of_life_gui {
     }
     private static void build(){
         JButton start = new JButton("Start");
-        start.addActionListener(e -> generate());
+        start.addActionListener(e -> {
+            try {
+                generate();
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         window.add(new JLabel("Seed: "), 10, 0, 100, 20);
         window.add(seed, 10, 20, 200, 20);
         window.add(new JLabel("X: "), 10, 40, 100, 20);
@@ -33,7 +39,7 @@ public class game_of_life_gui {
         window.show();
     }
 
-    private static void generate(){
+    private static void generate() throws InterruptedException {
         int width = Integer.parseInt(x.getText());
         int height = Integer.parseInt(y.getText());
         window = new createWindow("Game of Life", width*resolution, height*resolution);
@@ -42,34 +48,31 @@ public class game_of_life_gui {
         game();
     }
 
-    private static void game(){
+    private static void game() throws InterruptedException {
         game = new game_of_life(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()), Long.parseLong(seed.getText()));
         graphics =  (Graphics2D) canvas.getGraphics();
-        Thread gameloop = new Thread();
-        thread.start();
+        boolean living = true;
+        while(living) {
+            game.round();
+            boolean[][] board = game.getBoard();
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    int pos_x = i * resolution;
+                    int pos_y = j * resolution;
+                    if (board[i][j]) {
+                        graphics.setColor(Color.BLACK);
 
-    }
-
-    private static void gameloop(){
-        while(true){
-            round();
-        }
-    }
-    private static void round(){
-        game.round();
-        boolean[][] board = game.getBoard();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                int pos_x = i * resolution;
-                int pos_y = j * resolution;
-                if (board[i][j]) {
-                    graphics.setColor(Color.BLACK);
-
-                } else {
-                    graphics.setColor(Color.WHITE);
+                    } else {
+                        graphics.setColor(Color.WHITE);
+                    }
+                    graphics.fillRect(pos_x, pos_y, resolution, resolution);
                 }
-                graphics.fillRect(pos_x, pos_y, resolution, resolution);
             }
+            System.out.println(game.getAlive_count());
+
         }
+
     }
+
+
 }

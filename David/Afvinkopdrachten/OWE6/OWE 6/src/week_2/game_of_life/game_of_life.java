@@ -1,4 +1,4 @@
-package week_2;
+package week_2.game_of_life;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -9,6 +9,7 @@ public class game_of_life {
     private boolean[][] board;
     private int x;
     private int y;
+    private int alive_count;
     public game_of_life(int x_in, int y_in, long seed) {
         x = x_in;
         y = y_in;
@@ -30,11 +31,19 @@ public class game_of_life {
     public void round(){
         boolean [][] alive_neighbours = new boolean[x][y];
         int[][] neighbours = new int[x][y];
+        alive_count = 0;
         for(int i=0;i<x;i++){
             for(int j=0;j<y;j++){
-                int alive = get_alive_neighbours(i,j); 
+                boolean status = board[i][j];
+                int alive = get_alive_neighbours(i,j);
                 neighbours[i][j] = alive;
-                alive_neighbours[i][j] = alive == 2 || alive == 3;
+                if(status){
+                    alive_neighbours[i][j] = alive == 2 || alive == 3;
+                    alive_count++;
+                }
+                else {
+                    alive_neighbours[i][j] = alive == 3;
+                }
             }
         }
         System.out.println(Arrays.deepToString(neighbours));
@@ -70,6 +79,9 @@ public class game_of_life {
     }
     public boolean[][] getBoard(){
         return board;
+    }
+    public int getAlive_count(){
+        return alive_count;
     }
 
 }
