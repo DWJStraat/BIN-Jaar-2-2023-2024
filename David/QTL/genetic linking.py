@@ -1,14 +1,20 @@
 from tkinter import filedialog
 import pandas
 
+
 class Gene:
-    def __init__(self, path = None):
+    def __init__(self, path=None):
+        self.dataframe = None
+        self.data = None
+        self.nind = None
+        self.nloc = None
+        self.popt = None
+        self.name = None
+        self.timestamp = None
         if path is None:
             self.path = filedialog.askopenfilename()
         else:
             self.path = path
-
-
 
     def read(self):
         with open(self.path) as f:
@@ -34,7 +40,7 @@ class Gene:
             self.dataframe = pandas.DataFrame(output)
 
 
+
 if __name__ == '__main__':
     gene = Gene()
     gene.read()
-
