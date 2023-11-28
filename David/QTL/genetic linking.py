@@ -39,8 +39,26 @@ class Gene:
             self.data = output
             self.dataframe = pandas.DataFrame(output)
 
+    def build_pos_list(self):
+        self.pos_list = {}
+        for marker in self.data:
+            chars = self.data[marker]
+            freq = {}
+            counter = 0
+            for char in chars:
+                if char in freq:
+                    freq[char] += 1
+                else:
+                    freq[char] = 1
+                counter += 1
+            freq['total'] = counter
+            self.pos_list[marker] = {
+                'chars': chars,
+                'freq': freq
+            }
 
 
 if __name__ == '__main__':
-    gene = Gene()
+    gene = Gene("C:\\Users\\dstra\\Downloads\\CvixLer-MarkerSubset-LG1.txt")
     gene.read()
+    gene.build_pos_list()
