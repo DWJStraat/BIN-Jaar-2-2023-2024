@@ -86,7 +86,7 @@ class Gene:
 
 
 if __name__ == '__main__':
-    gene = Gene("C:\\Users\\dstra\\Downloads\\CvixLer-MarkerSubset-LG1.txt")
+    gene = Gene("")
     gene.read()
     gene.build_pos_list()
     gene.permutation_change_calc()
