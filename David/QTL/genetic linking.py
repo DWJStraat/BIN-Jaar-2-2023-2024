@@ -80,13 +80,10 @@ class Gene:
                                          result + char)
         except IndexError:
             self.permutations.append(result)
-            self.permcount += 1
-            print(f"Progress: {self.permcount}/{self.possible_permutations}",
-                  end='\r')
 
 
 if __name__ == '__main__':
-    gene = Gene("")
+    gene = Gene("CvixLer-MarkerSubset-LG1.txt")
     gene.read()
     gene.build_pos_list()
     gene.permutation_change_calc()
