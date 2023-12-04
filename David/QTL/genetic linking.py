@@ -1,9 +1,13 @@
+from math import factorial
 from tkinter import filedialog
 import pandas
+from alive_progress import alive_bar
 
 
 class Gene:
     def __init__(self, path=None):
+        self.permutations = []
+        self.permcount = 0
         self.dataframe = None
         self.data = None
         self.nind = None
@@ -57,8 +61,32 @@ class Gene:
                 'freq': freq
             }
 
+    def permutation_change_calc(self):
+        permutations = []
+        markers = list(self.data.keys())
+        self.possible_permutations = 380
+        self.permutation_builder(markers)
+        return permutations
+
+    def permutation_builder(self, marker_list, marker_index=0,
+                            result=''):
+        try:
+            marker = marker_list[marker_index]
+            chars = self.pos_list[marker]['freq'].keys()
+            for char in chars:
+                if char == 'total':
+                    continue
+                self.permutation_builder(marker_list, marker_index + 1,
+                                         result + char)
+        except IndexError:
+            self.permutations.append(result)
+            self.permcount += 1
+            print(f"Progress: {self.permcount}/{self.possible_permutations}",
+                  end='\r')
+
 
 if __name__ == '__main__':
     gene = Gene("C:\\Users\\dstra\\Downloads\\CvixLer-MarkerSubset-LG1.txt")
     gene.read()
     gene.build_pos_list()
+    gene.permutation_change_calc()

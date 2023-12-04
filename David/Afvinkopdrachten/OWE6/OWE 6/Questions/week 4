@@ -1,0 +1,27 @@
+a) 25%
+b) see image
+c) a = 00, g = 01, c = 10, t = 11
+d)
+11001101
+10100000
+11011000
+11111111
+11011010
+10011000
+11010000
+01100011
+01110001
+10011001
+10001101
+10101100
+10101101
+10001001
+10
+e) ja
+f) nee
+g) ja
+
+3a) repeterende codes compresseren
+b) veelvoorkomende variants een id geven
+c) lossless
+d) nee, door de grootte van de data.

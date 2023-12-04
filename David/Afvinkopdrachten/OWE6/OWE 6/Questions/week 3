@@ -7,3 +7,8 @@ pop() --> [5,2] 8
 pop() --> [5] 2
 push(9) --> [5,9]
 push(1) --> [5,9,1]
+
+BigO building ArrayList: 1
+BigO building LinkedList: n
+BigO get gen on index from ArrayList: 1
+BigO get gen on index from LinkedList: n
