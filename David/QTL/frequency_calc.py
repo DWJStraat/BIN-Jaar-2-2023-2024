@@ -71,7 +71,3 @@ def chi_square_test(frequency_list, gene_list, threshold = 5):
 
 
 
-if __name__ == '__main__':
-    gene = Gene("CvixLer-MarkerSubset-LG1.txt")
-    gene.read()
-    gene.score()

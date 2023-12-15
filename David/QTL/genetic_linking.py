@@ -36,6 +36,7 @@ class Gene:
         self.name = None
         self.timestamp = None
         self.point_matrix = {}
+        self.marker_names = []
         if path is None:  # If no path is given
             self.path = filedialog.askopenfilename()  # Ask the user for a path
         else:  # If a path is given
@@ -43,10 +44,11 @@ class Gene:
 
     def score(self):
         for gene_1 in self.data:
+            self.marker_names.append(gene_1)
+            self.point_matrix[gene_1] = []
             for gene_2 in self.data:
-                self.point_matrix[gene_1][gene_2] = 0
                 if gene_1 == gene_2:
-                    continue
+                    pass
                 self.score_2_genes(gene_1, gene_2)
 
     def score_2_genes(self, gene_1, gene_2):
@@ -65,7 +67,22 @@ class Gene:
                 counter += 1
         percentage = counter / length * 100
         if percentage < 50:
-            self.point_matrix[gene_1][gene_2] = percentage
+            self.point_matrix[gene_1].append(percentage)
+        else:
+            self.point_matrix[gene_1].append(0)
+
+    def build_dijkstra_matrix(self):
+        dijkstra_matrix = []
+        for gene_1 in self.point_matrix:
+            for value in self.point_matrix[gene_1]:
+                index = self.point_matrix[gene_1].index(value)
+
+                gene_2 = self.marker_names[index]
+                if (gene_1 == gene_2 or (gene_2, gene_1, value) in
+                        dijkstra_matrix) or value == 0:
+                    continue
+                dijkstra_matrix.append((gene_1, gene_2, value))
+        return dijkstra_matrix
 
 
     def read(self):
