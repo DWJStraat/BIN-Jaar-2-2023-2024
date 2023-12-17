@@ -1,10 +1,6 @@
 from genetic_linking import *
-from dijkstra import *
-from tsp import *
 import numpy as np
 from python_tsp.exact import solve_tsp_dynamic_programming
-import pandas as pd
-import openpyxl
 
 if __name__ == '__main__':
     gene = Gene("CvixLer-MarkerSubset-LG1.txt")
@@ -28,6 +24,9 @@ if __name__ == '__main__':
         distance = gene.point_matrix[previous_name][current]
         pos_list[current_name] = pos_list[previous_name] + distance/dist_mod
 
-
-
-
+    output_list = ["Group 1"]
+    for key in pos_list:
+        output_list.append(f"{key}\t{pos_list[key]}")
+    output = "\n".join(output_list)
+    with open("output.txt", "w") as f:
+        f.write(output)

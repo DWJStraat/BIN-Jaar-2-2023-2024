@@ -1,3 +1,10 @@
+"""
+A Python implementation of Dijkstra's single source shortest path algorithm.
+NOT CURRENTLY IN USE
+
+"""
+
+
 from collections import defaultdict
 import graphviz
 from itertools import *

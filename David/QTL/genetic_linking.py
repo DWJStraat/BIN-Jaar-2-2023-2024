@@ -27,7 +27,8 @@ class Gene:
         :param path: path to the file containing the gene data
         """
         self.permutations = []  # Create an empty list
-        self.permcount = 0  # Create a variable to keep track of the number of permutations
+        self.permcount = 0  # Create a variable to keep track of the
+        # number of permutations
         self.dataframe = None
         self.data = None
         self.nind = None
@@ -103,21 +104,28 @@ class Gene:
             characters = ''
             for line in filecontents:  # Loop through the data
                 if not line.startswith(
-                        ' ') and not characters == '':  # If the line doesn't start with a space and the characters variable is not empty
+                        ' ') and not characters == '':  # If the line doesn't
+                    # start with a space and the characters variable is not
+                    # empty
                     output[marker] = characters.strip().split(
                         ' ')  # Add the characters to the output dictionary
-                    marker = line  # Set the marker variable to the current line
+                    marker = line  # Set the marker variable to
+                    # the current line
 
                     characters = ''  # Reset the characters variable
                 elif not line.startswith(
-                        ' ') and characters == '':  # If the line doesn't start with a space and the characters variable is empty
-                    marker = line  # Set the marker variable to the current line
+                        ' ') and characters == '':  # If the line doesn't
+                    # start with a space and the characters variable is empty
+                    marker = line  # Set the marker variable to the current
+                    # line
 
                 else:
                     characters += line.replace('  ',
-                                               ' ')  # Add the characters to the characters variable
+                                               ' ')  # Add the
+                    # characters to the characters variable
 
-            self.data = output  # Set the data variable to the output dictionary
+            self.data = output  # Set the data variable to the output
+            # dictionary
             self.dataframe = pandas.DataFrame(
                 output)  # Set the dataframe variable to the output dictionary
 
@@ -133,7 +141,8 @@ class Gene:
             freq = {}  # Create an empty dictionary
             counter = 0  # Create a counter variable
             for char in chars:  # Loop through the characters
-                if char in freq:  # If the character is already in the dictionary
+                if char in freq:  # If the character is already in the
+                    # dictionary
                     freq[char] += 1  # Add one to the value of the character
                 else:  # If the character is not in the dictionary
                     freq[char] = 1  # Set the value of the character to 1
