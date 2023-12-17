@@ -26,7 +26,8 @@ if __name__ == '__main__':
 
     output_list = ["Group 1"]
     for key in pos_list:
-        output_list.append(f"{key}\t{pos_list[key]}")
+        name = key.split(" ")[0]
+        output_list.append(f"{name}\t{pos_list[key]}")
     output = "\n".join(output_list)
     with open("output.txt", "w") as f:
         f.write(output)
