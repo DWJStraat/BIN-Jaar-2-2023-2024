@@ -9,6 +9,7 @@ Author: David van Straat
 
 from tkinter import filedialog
 import pandas
+from scipy.stats import chisquare
 
 
 class Gene:
@@ -40,6 +41,37 @@ class Gene:
             self.path = filedialog.askopenfilename()  # Ask the user for a path
         else:  # If a path is given
             self.path = path  # Set the path variable to the given path
+
+    def chi_square(self):
+        """
+        Function to calculate the chi square value
+        :return: the chi square value
+        """
+        freq = {}
+        total = {}
+        length = 0
+        for marker in self.data:
+            freq[marker] = {}
+            for char in self.data[marker]:
+                if char in freq[marker]:
+                    freq[marker][char] += 1
+                else:
+                    freq[marker][char] = 1
+                if char in total:
+                    total[char] += 1
+                else:
+                    total[char] = 1
+            length += 1
+        average = {}
+        for char in total:
+            average[char] = total[char] / length
+        for marker in freq:
+            chi_square = 0
+            for char in freq[marker]:
+                expected = average[char]
+                chi_square += (freq[marker][char] - expected) ** 2 / expected
+                if chi_square > expected:
+                    del (self.data[marker])
 
     def score(self):
         """
@@ -190,4 +222,3 @@ class Gene:
                                          result + char)
         except IndexError:
             self.permutations.append(result)
-

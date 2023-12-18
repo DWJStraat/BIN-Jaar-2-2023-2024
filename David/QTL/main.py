@@ -6,6 +6,7 @@ Author: David Straat
 from genetic_linking import *
 import numpy as np
 from python_tsp.exact import solve_tsp_dynamic_programming
+from scipy.stats import chisquare
 
 if __name__ == '__main__':
     path = filedialog.askopenfilename()
@@ -15,10 +16,14 @@ if __name__ == '__main__':
         print("File not found")
         exit()
     gene.read()
+    print("Read file")
+    gene.chi_square()
     gene.score()
+    print("Scored genes")
     matrix = []
     for key in gene.point_matrix:
         matrix.append(gene.point_matrix[key])
+    print("Built matrix")
     matrix = np.array(matrix)
     matrix[:, 0] = 0
     permutation, distance = solve_tsp_dynamic_programming(matrix)
