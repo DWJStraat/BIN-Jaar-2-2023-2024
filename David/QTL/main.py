@@ -6,7 +6,6 @@ if __name__ == '__main__':
     gene = Gene("CvixLer-MarkerSubset-LG1.txt")
     gene.read()
     gene.score()
-    a = gene.build_dijkstra_matrix()
     matrix = []
     for key in gene.point_matrix:
         matrix.append(gene.point_matrix[key])
