@@ -4,15 +4,11 @@ for the genetic linking project. This algorithm is designed to
 take in a file containing genetic data and output a file
 containing the genetic data with the genetic linkage
 information appended to it.
-Author: David van Straat, Douwe Berkeij
+Author: David van Straat
 """
 
-# from math import factorial
 from tkinter import filedialog
 import pandas
-
-
-# from alive_progress import alive_bar
 
 
 class Gene:
@@ -26,8 +22,10 @@ class Gene:
         Constructor for the Gene class
         :param path: path to the file containing the gene data
         """
+        self.pos_list = None
+        self.possible_permutations = None
         self.permutations = []  # Create an empty list
-        self.permcount = 0  # Create a variable to keep track of the
+        self.permutation_count = 0  # Create a variable to keep track of the
         # number of permutations
         self.dataframe = None
         self.data = None
@@ -44,6 +42,9 @@ class Gene:
             self.path = path  # Set the path variable to the given path
 
     def score(self):
+        """
+        Function to score the genes
+        """
         for gene_1 in self.data:
             self.marker_names.append(gene_1)
             self.point_matrix[gene_1] = []
@@ -53,6 +54,12 @@ class Gene:
                 self.score_2_genes(gene_1, gene_2)
 
     def score_2_genes(self, gene_1, gene_2):
+        """"
+        Build a matrix of the percentage of matching characters
+        between two genes
+        :param gene_1: the first gene
+        :param gene_2: the second gene
+        """
         val_1 = self.data[gene_1]
         val_2 = self.data[gene_2]
         counter = 0
@@ -73,6 +80,9 @@ class Gene:
             self.point_matrix[gene_1].append(0)
 
     def build_dijkstra_matrix(self):
+        """
+        Function to build the matrix for a Dijkstra algorithm
+        """
         dijkstra_matrix = []
         for gene_1 in self.point_matrix:
             for value in self.point_matrix[gene_1]:
@@ -80,11 +90,10 @@ class Gene:
 
                 gene_2 = self.marker_names[index]
                 if (gene_1 == gene_2 or (gene_2, gene_1, value) in
-                        dijkstra_matrix) or value == 0:
+                    dijkstra_matrix) or value == 0:
                     continue
                 dijkstra_matrix.append((gene_1, gene_2, value))
         return dijkstra_matrix
-
 
     def read(self):
         """
@@ -99,23 +108,22 @@ class Gene:
             self.nloc = contents.split('\n')[4]  # Get the number of loci
             self.nind = contents.split('\n')[
                 5]  # Get the number of individuals
-            filecontents = contents.split('\n')[7:]  # Get the actual data
+            file_contents = contents.split('\n')[7:]  # Get the actual data
             output = {}
             characters = ''
-            for line in filecontents:  # Loop through the data
-                if not line.startswith(
-                        ' ') and not characters == '':  # If the line doesn't
-                    # start with a space and the characters variable is not
-                    # empty
+            for line in file_contents:  # Loop through the data
+                if not line.startswith(' ') and not characters == '':
+                    # If the line doesn't start with a space and the
+                    # characters variable is not empty
                     output[marker] = characters.strip().split(
                         ' ')  # Add the characters to the output dictionary
                     marker = line  # Set the marker variable to
                     # the current line
 
                     characters = ''  # Reset the characters variable
-                elif not line.startswith(
-                        ' ') and characters == '':  # If the line doesn't
-                    # start with a space and the characters variable is empty
+                elif not line.startswith(' ') and characters == '':  # If the
+                    # line doesn't start with a space and the characters
+                    # variable is empty
                     marker = line  # Set the marker variable to the current
                     # line
 
@@ -154,6 +162,10 @@ class Gene:
             }
 
     def permutation_change_calc(self):
+        """
+        Function to calculate the change in permutation
+        :return: the different permutations
+        """
         permutations = []
         markers = list(self.data.keys())
         self.possible_permutations = 380
@@ -162,6 +174,12 @@ class Gene:
 
     def permutation_builder(self, marker_list, marker_index=0,
                             result=''):
+        """
+        Function to build the permutations
+        :param marker_list: A list of markers
+        :param marker_index: A list of indices for the markers
+        :param result: The current result. Defaults to an empty string
+        """
         try:
             marker = marker_list[marker_index]
             chars = self.pos_list[marker]['freq'].keys()
@@ -173,8 +191,3 @@ class Gene:
         except IndexError:
             self.permutations.append(result)
 
-
-if __name__ == '__main__':
-    gene = Gene("CvixLer-MarkerSubset-LG1.txt")
-    gene.read()
-    gene.build_pos_list()

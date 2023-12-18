@@ -1,7 +1,10 @@
-from genetic_linking import *
-from scipy.stats import chi2_contingency as chi2
 
 def frequency_calc(data):
+    """
+    Function to calculate the frequency of each character at each position
+    :param data:
+    :return:
+    """
     permutations = {}
     gene_list = []
     for entry in data:
