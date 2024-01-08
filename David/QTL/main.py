@@ -45,3 +45,5 @@ if __name__ == '__main__':
     output = "\n".join(output_list)
     with open("output.txt", "w") as f:
         f.write(output)
+    for removed in gene.removed:
+        print(removed)

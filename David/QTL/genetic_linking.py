@@ -23,6 +23,7 @@ class Gene:
         Constructor for the Gene class
         :param path: path to the file containing the gene data
         """
+        self.removed = []
         self.pos_list = None
         self.possible_permutations = None
         self.permutations = []  # Create an empty list
@@ -72,6 +73,7 @@ class Gene:
                 chi_square += (freq[marker][char] - expected) ** 2 / expected
                 if chi_square > expected:
                     del (self.data[marker])
+                    self.removed.append(marker)
 
     def score(self):
         """
